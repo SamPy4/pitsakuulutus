@@ -1,5 +1,7 @@
 import paho.mqtt.client as mqtt
 
+
+""" MQTT EI TULE TOIMIMAAN !!!!! """
 class raberry():
     def __init__(self):
         self.port = 1883
