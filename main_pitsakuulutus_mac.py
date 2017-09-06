@@ -23,6 +23,7 @@ class mac():
         value = msg.payload # The sent value
 
 
+    # The main loop
     def run(self):
         while True:
             self.client.loop()
