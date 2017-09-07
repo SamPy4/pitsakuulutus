@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 
 
 """ MQTT EI TULE TOIMIMAAN !!!!! """
-class raberry():
+class raspberry():
     def __init__(self):
         self.port = 1883
         self.path = "pitsatilaus123"
