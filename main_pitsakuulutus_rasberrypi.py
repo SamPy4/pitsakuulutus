@@ -1,36 +1,13 @@
-import paho.mqtt.client as mqtt
+import socket
 
+TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
+MESSAGE = "Hello, World!"
 
-""" MQTT EI TULE TOIMIMAAN !!!!! """
-class raspberry():
-    def __init__(self):
-        self.port = 1883
-        self.path = "pitsatilaus123"
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send(MESSAGE)
+data = s.recv(BUFFER_SIZE)
 
-        self.client = mqtt.Client()
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
-
-        self.client.connect("iot.eclipse.org", self.port, 60)
-
-        self.step = 1 # Loop step
-
-    def on_connect(self, client, userdata, flags, rc):
-        print("Connected with result code "+str(rc))
-
-        self.client.subscribe(self.Path + "/#")
-
-    def on_message(self, client, userdata, msg):
-        topic = msg.topic # The name of variable. For example path/button1 that variable name is button1
-        value = msg.payload # The sent value
-
-
-    def run(self):
-        while True:
-            self.client.loop()
-
-            time.sleep(self.step) # looping the mqtt protocol step amount of seconds
-
-if __name__ == "__main__":
-    main = rasberry()
-    main.run()
+s.close()
