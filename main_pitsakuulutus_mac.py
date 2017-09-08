@@ -2,7 +2,7 @@ import socket, time, os, sys
 
 # SERVER
 
-TCP_IP = "10.0.0.5"
+TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
 BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
