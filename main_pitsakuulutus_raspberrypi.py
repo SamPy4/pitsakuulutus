@@ -33,7 +33,8 @@ while True:
 
        if data.decode() == "valmis":
            valmis()
-
+           
+    s.connect((TCP_IP, TCP_PORT))
     time.sleep(0.5)
 
 
