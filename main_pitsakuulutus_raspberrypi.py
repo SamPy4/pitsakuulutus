@@ -17,11 +17,10 @@ s.connect((TCP_IP, TCP_PORT))
 
 def connect():
     try:
-        print("trying to reconnect")
         s.connect((TCP_IP, TCP_PORT))
         print("reconnected")
     except:
-        print()
+        print("reconnection failed")
     return
 
 def kuulutus():
