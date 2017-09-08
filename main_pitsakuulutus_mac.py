@@ -24,8 +24,11 @@ def restart_server():
 
 def reconnect():
     #restart_server()
-
     try:
+        print(tries)
+        if tries == 10:
+            restart_server()
+
         print("Reconnecting...")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -35,7 +38,9 @@ def reconnect():
         print ('Connection address:', addr)
         time.sleep(1)
     except:
+        print(tries)
         return
+    print(tries)
 
 def haeData():
     while True:
@@ -57,11 +62,16 @@ def kaynnistaKuulutus():
     time.sleep(4)
     return
 
-while 1:
+last_time_kuulutettu = time.time()
+while True:
     data = haeData()
 
     if data.decode() == "kuulutus":
-        kaynnistaKuulutus()
+        if time.time() - last_time_kuulutettu  >= 15:
+            last_time_kuulutettu = time.time()
+            kaynnistaKuulutus()
+        else:
+            conn.send(str.encode("Ei voi kuuluttaa vielä\n"))
         conn.send(str.encode("valmis"))
 
     if not data:
