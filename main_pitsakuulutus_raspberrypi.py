@@ -50,7 +50,7 @@ while True:
        if data.decode() == "valmis":
            valmis()
 
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 
 s.close()
