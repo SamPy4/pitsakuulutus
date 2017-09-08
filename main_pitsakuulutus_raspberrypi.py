@@ -17,6 +17,7 @@ s.connect((TCP_IP, TCP_PORT))
 
 def connect():
     try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((TCP_IP, TCP_PORT))
         print("reconnected")
     except:
@@ -33,6 +34,7 @@ def valmis():
     pass
 
 while True:
+
     if GPIO.input(13) == 1:
        print("Pyyntö lähetetty")
        kuulutus()
