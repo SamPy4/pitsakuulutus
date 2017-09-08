@@ -20,15 +20,23 @@ def kuulutus():
     s.send(kuulutusBYTE)
     return
 
+def valmis():
+    # Välkyttää ledejä tai jotain
+    pass
+
 while True:
     if GPIO.input(13) == 1:
-       print("Button is pressed")
+       print("Pyyntö lähetetty")
        kuulutus()
+       data = s.recv(BUFFER_SIZE)
+       print("\n", data.decode(), "\n")
+
+       if data.decode() == "valmis":
+           valmis()
 
     time.sleep(0.5)
 
 
-data = s.recv(BUFFER_SIZE)
 s.close()
 
 print ("received data:", data)
