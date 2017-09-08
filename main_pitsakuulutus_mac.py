@@ -1,4 +1,4 @@
-import socket
+import socket, time
 
 # SERVER
 
@@ -18,6 +18,28 @@ conn, addr = s.accept()
 print ('Connection address:', addr)
 
 
+def reconnect():
+    try:
+        print("Reconnecting...")
+        s.listen(1)
+
+        print("Accepting...")
+        conn, addr = s.accept()
+
+        print ('Connection address:', addr)
+    except:
+        reconnect()
+
+def haeData():
+    while True:
+        try:
+            data = conn.recv(BUFFER_SIZE)
+            break
+        except:
+            print("No data recieved!!!")
+            reconnect()
+    return data
+
 def kaynnistaKuulutus():
     """ ITSE KUULUTUKSEN KÄYNNISTYS """
     print("KUULUTETAAAAN: Pitsatilauksien pitsat ovat haettavissa :)")
@@ -25,7 +47,7 @@ def kaynnistaKuulutus():
     return
 
 while 1:
-    data = conn.recv(BUFFER_SIZE)
+    data = haeData()
 
     if data.decode() == "kuulutus":
         kaynnistaKuulutus()
