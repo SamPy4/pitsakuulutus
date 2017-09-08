@@ -38,13 +38,17 @@ while True:
     if GPIO.input(13) == 1:
        print("Pyyntö lähetetty")
        kuulutus()
-       data = s.recv(BUFFER_SIZE)
+
+       try:
+           data = s.recv(BUFFER_SIZE)
+       except:
+           connect()
+
        print("\n", data.decode(), "\n")
 
        if data.decode() == "valmis":
            valmis()
 
-    connect()
     time.sleep(0.5)
 
 
