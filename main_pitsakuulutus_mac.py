@@ -16,8 +16,18 @@ print("Accepting...")
 conn, addr = s.accept()
 
 print ('Connection address:', addr)
+
+
+def kaynnistaKuulutus():
+    """ ITSE KUULUTUKSEN KÄYNNISTYS """
+    print("KUULUTETAAAAN: Pitsatilauksien pitsat ovat haettavissa :)")
+    return
+
 while 1:
     data = conn.recv(BUFFER_SIZE)
+
+    if data[1:] == "kuulutus":
+        kaynnistaKuulutus()
 
     if not data:
         break
