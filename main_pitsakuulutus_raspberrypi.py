@@ -42,6 +42,7 @@ while True:
        try:
            data = s.recv(BUFFER_SIZE)
        except:
+           print("Disconnected")
            connect()
 
        print("\n", data.decode(), "\n")
