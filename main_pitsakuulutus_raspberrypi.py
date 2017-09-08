@@ -15,6 +15,13 @@ MESSAGE = str.encode("Hello, World!")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 
+def connect():
+    try:
+        s.connect((TCP_IP, TCP_PORT))
+    except:
+        print()
+    return
+    
 def kuulutus():
     kuulutusBYTE = str.encode("kuulutus")
     s.send(kuulutusBYTE)
@@ -33,8 +40,8 @@ while True:
 
        if data.decode() == "valmis":
            valmis()
-           
-    s.connect((TCP_IP, TCP_PORT))
+
+    connect()
     time.sleep(0.5)
 
 
