@@ -17,11 +17,13 @@ s.connect((TCP_IP, TCP_PORT))
 
 def connect():
     try:
+        print("trying to reconnect")
         s.connect((TCP_IP, TCP_PORT))
+        print("reconnected")
     except:
         print()
     return
-    
+
 def kuulutus():
     kuulutusBYTE = str.encode("kuulutus")
     s.send(kuulutusBYTE)
