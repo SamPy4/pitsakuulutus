@@ -1,4 +1,4 @@
-import socket, time
+import socket, time, os, sys
 
 # SERVER
 
@@ -17,27 +17,38 @@ conn, addr = s.accept()
 
 print ('Connection address:', addr)
 
+def restart_server():
+    """Restarts the server. """
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
 
 def reconnect():
+    #restart_server()
+
     try:
         print("Reconnecting...")
-        s.listen(1)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        print("Accepting...")
-        conn, addr = s.accept()
+        print("Connecting...")
+        s.connect((TCP_IP, TCP_PORT))
 
         print ('Connection address:', addr)
+        time.sleep(1)
     except:
-        reconnect()
+        return
 
 def haeData():
     while True:
         try:
             data = conn.recv(BUFFER_SIZE)
             break
-        except:
-            print("No data recieved!!!")
+        except: # socket.error as e:
+            print()
             reconnect()
+            # if e.errno == e.errno.ECONNRESET:
+            #     print("No data recieved!!!")
+            # else:
+            #     raise
     return data
 
 def kaynnistaKuulutus():
