@@ -16,7 +16,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 
 def kuulutus():
-    kuulutusBYTE = str.encode("Kuutluta!!!!")
+    kuulutusBYTE = str.encode("kuulutus")
     s.send(kuulutusBYTE)
     return
 
