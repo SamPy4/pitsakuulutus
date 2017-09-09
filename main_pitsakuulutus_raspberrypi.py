@@ -7,7 +7,8 @@ import time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
-TCP_IP = "192.168.1.38"
+# TCP_IP must be the server ip
+TCP_IP = "1.0.0.5"   # public ip "192.168.1.00"
 TCP_PORT = 12346
 BUFFER_SIZE = 1024
 MESSAGE = str.encode("Hello, World!")
