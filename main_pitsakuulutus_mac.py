@@ -63,12 +63,13 @@ def kaynnistaKuulutus():
     time.sleep(4)
     return
 
-last_time_kuulutettu = time.time()
+spamminesto = 15 # sekuntia
+last_time_kuulutettu = time.time() - spamminesto
 while True:
     data = haeData()
 
     if data.decode() == "kuulutus":
-        if time.time() - last_time_kuulutettu  >= 15:
+        if time.time() - last_time_kuulutettu  >= spamminesto:
             last_time_kuulutettu = time.time()
             kaynnistaKuulutus()
         else:
