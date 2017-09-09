@@ -1,14 +1,13 @@
+import socket
 import RPi.GPIO as GPIO
-import socket, time
+import time
 
 # CLIENT
 
-button1 = 13 # Main button GPIO pin number
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(button1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
-# TCP_IP must be the server ip
-TCP_IP = "1.0.0.5"   # public ip "192.168.1.00"
+TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
 BUFFER_SIZE = 1024
 MESSAGE = str.encode("Hello, World!")
@@ -36,7 +35,7 @@ def valmis():
 
 while True:
 
-    if GPIO.input(button1) == 1:
+    if GPIO.input(13) == 1:
        print("Pyyntö lähetetty")
        kuulutus()
 
