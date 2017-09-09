@@ -1,18 +1,35 @@
 import RPi.GPIO as GPIO
 import time
 
+
+button = 13
+led1   = 6
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(button, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+
+GPIO.setup(led1, GPIO.OUT)
+
 
 def kuulutus():
     time.sleep(4)
-    pass
+    print("Done")
 
+
+state = 0
+
+print("Next comes loop")
 while True:
+    
     if GPIO.input(13) == 1:
-       print("Button is pressed")
-       kuulutus()
+        state =  1 - state
+        print("Button is pressed")
+        time.sleep(0.3)
+#        kuulutus()
 
-    print("Loop")
-
-    time.sleep(0.5)
+        
+    if state == 1:
+        GPIO.output(6, True)
+    if state == 0:
+        GPIO.output(6, False)
+            
+    time.sleep(0.1)
