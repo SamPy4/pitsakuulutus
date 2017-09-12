@@ -1,13 +1,13 @@
 import socket
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 
 # CLIENT
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
-TCP_IP = "10.0.0.5"
+TCP_IP = "10.1.184.189"
 TCP_PORT = 12346
 BUFFER_SIZE = 1024
 MESSAGE = str.encode("Hello, World!")
@@ -33,25 +33,30 @@ def valmis():
     # Välkyttää ledejä tai jotain
     pass
 
+kuulutus()
 while True:
 
-    if GPIO.input(13) == 1:
-       print("Pyyntö lähetetty")
-       kuulutus()
+    # if GPIO.input(13) == 1:
+    #    print("Pyyntö lähetetty")
+    #    kuulutus()
 
-       try:
-           data = s.recv(BUFFER_SIZE)
-       except:
-           print("Disconnected")
-           connect()
+    cmd =input(">>>")
 
-       print("\n", data.decode(), "\n")
+    if cmd == "":
+        kuulutus()
 
-       if data.decode() == "valmis":
-           valmis()
+    try:
+       data = s.recv(BUFFER_SIZE)
+    except:
+       print("Disconnected")
+       #connect()
+
+    print("\n", data.decode(), "\n")
+
+    if data.decode() == "valmis":
+       valmis()
 
     time.sleep(0.1)
-
 
 s.close()
 
