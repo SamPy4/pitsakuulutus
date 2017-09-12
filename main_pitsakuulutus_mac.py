@@ -3,8 +3,8 @@ import socket, time, os, sys
 # SERVER
 
 # TCP_IP must be server IP
-TCP_IP = "10.0.0.5"  # public IP "192.168.1.00"
-TCP_PORT = 12346
+TCP_IP = "10.1.134.115"  # public IP "192.168.1.00"
+TCP_PORT = 1234
 BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
