@@ -70,17 +70,22 @@ try:
     while True:
         data = haeData()
 
+        if data:
+            conn.send(str.encode("Server: Request recieved\n"))
+
         if data.decode() == "kuulutus":
             if time.time() - last_time_kuulutettu  >= spamminesto:
                 last_time_kuulutettu = time.time()
+                conn.send(str.encode("Action: Kuulutetaan\n"))
                 kaynnistaKuulutus()
                 continue
             else:
-                conn.send(str.encode("Ei voi kuuluttaa vielä\n"))
-            conn.send(str.encode("valmis"))
+                conn.send(str.encode("Action: Ei voi kuuluttaa vielä\n"))
 
-        if not data:
-            break
+            conn.send(str.encode("Done"))
+
+        # if not data:
+        #     break
 
         print ("received data:", data.decode())
         #conn.send(data)  # echo
