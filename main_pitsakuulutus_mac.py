@@ -10,7 +10,7 @@ def restart_server():
     os.execl(python, python, * sys.argv)
 
 try:
-    TCP_IP = "10.1.134.124"  # public IP "192.168.1.00"
+    TCP_IP = "192.168.1.38"  # public IP "192.168.1.00"
     TCP_PORT = 1234
     BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
