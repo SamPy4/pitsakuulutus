@@ -1,63 +1,73 @@
 import socket
 #import RPi.GPIO as GPIO
-import time
+import time, sys, os
 
 # CLIENT
 
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+try:
+    TCP_IP = "10.1.134.124"
+    TCP_PORT = 1234
+    BUFFER_SIZE = 1024
+    MESSAGE = str.encode("Hello, World!")
 
-TCP_IP = "10.1.184.189"
-TCP_PORT = 12346
-BUFFER_SIZE = 1024
-MESSAGE = str.encode("Hello, World!")
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
+    def restart_client():
+        """Restarts the server. """
+        python = sys.executable
+        os.execl(python, python, * sys.argv)
 
-def connect():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((TCP_IP, TCP_PORT))
-        print("reconnected")
-    except:
-        print("reconnection failed")
-    return
+    def connect():
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((TCP_IP, TCP_PORT))
+            print("reconnected")
+        except:
+            print("reconnection failed")
+        return
 
-def kuulutus():
-    kuulutusBYTE = str.encode("kuulutus")
-    s.send(kuulutusBYTE)
-    return
+    def kuulutus():
+        kuulutusBYTE = str.encode("kuulutus")
+        s.send(kuulutusBYTE)
+        return
 
-def valmis():
-    # Välkyttää ledejä tai jotain
-    pass
+    def valmis():
+        # Välkyttää ledejä tai jotain
+        pass
 
-kuulutus()
-while True:
+    kuulutus()
+    while True:
 
-    # if GPIO.input(13) == 1:
-    #    print("Pyyntö lähetetty")
-    #    kuulutus()
+        # if GPIO.input(13) == 1:
+        #    print("Pyyntö lähetetty")
+        #    kuulutus()
+        cmd = ":"
+        cmd =input(">>>")
 
-    cmd =input(">>>")
+        if cmd == "":
+            kuulutus()
 
-    if cmd == "":
-        kuulutus()
+        try:
+           data = s.recv(BUFFER_SIZE)
+        except:
+           print("Disconnected")
+           #connect()
 
-    try:
-       data = s.recv(BUFFER_SIZE)
-    except:
-       print("Disconnected")
-       #connect()
+        print("\n", data.decode(), "\n")
 
-    print("\n", data.decode(), "\n")
+        if data.decode() == "valmis":
+           valmis()
 
-    if data.decode() == "valmis":
-       valmis()
+        time.sleep(0.1)
 
-    time.sleep(0.1)
+    s.close()
 
-s.close()
+    print ("received data:", data)
 
-print ("received data:", data)
+except:
+    raise
+    time.sleep(6)
+    restart_client()
