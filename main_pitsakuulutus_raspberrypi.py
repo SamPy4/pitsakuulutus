@@ -38,7 +38,6 @@ try:
         # Välkyttää ledejä tai jotain
         pass
 
-    kuulutus()
     while True:
 
         # if GPIO.input(13) == 1:
@@ -69,5 +68,4 @@ try:
 
 except:
     raise
-    time.sleep(6)
     restart_client()
