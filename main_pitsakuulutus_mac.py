@@ -2,14 +2,39 @@ import socket, time, os, sys
 
 # SERVER
 
-# TCP_IP must be server IP
 
 def restart_server():
-    """Restarts the server. """
+    """ Restarts the program. """
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
+def reconnect():
+    """ Restarts the server program in hope of a new connection """
+    print("Disconnected!!!")
+    conn.close()
+    print("Server closed")
+    restart_server()  # If restarted this will restart the program
+#     #restart_server()
+#     try:
+#         print(tries)
+#         if tries == 10:
+#             restart_server()
+#
+#         print("Reconnecting...")
+#         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#
+#         print("Connecting...")
+#         s.connect((TCP_IP, TCP_PORT))
+#
+#         print ('Connection address:', addr)
+#         time.sleep(1)
+#     except:
+#         print(tries)
+#         return
+#     print(tries)
+
 try:
+    # TCP_IP must be server IP
     TCP_IP = "192.168.1.38"  # public IP "192.168.1.00"
     TCP_PORT = 1234
     BUFFER_SIZE = 20  # Normally 1024, but we want fast response
@@ -17,33 +42,13 @@ try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((TCP_IP, TCP_PORT))
 
-    print("bind ok, waiting connection...")
-    s.listen(1)
+    print("Bind ok, waiting connection...")
+    s.listen(1)   # Waiting only 1 connection
 
     print("Accepting...")
     conn, addr = s.accept()
 
     print ('Connection address:', addr)
-
-    def reconnect():
-        #restart_server()
-        try:
-            print(tries)
-            if tries == 10:
-                restart_server()
-
-            print("Reconnecting...")
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-            print("Connecting...")
-            s.connect((TCP_IP, TCP_PORT))
-
-            print ('Connection address:', addr)
-            time.sleep(1)
-        except:
-            print(tries)
-            return
-        print(tries)
 
     def haeData():
         while True:
@@ -65,8 +70,11 @@ try:
         time.sleep(4)
         return
 
+    # Estää ihmisiä rämppäämästä nappia
     spamminesto = 15 # sekuntia
     last_time_kuulutettu = time.time() - spamminesto
+
+    # The main loop starts here
     while True:
         data = haeData()
 
@@ -88,8 +96,6 @@ try:
         #     break
 
         print ("received data:", data.decode())
-        #conn.send(data)  # echo
-    conn.close()
 
 except:
-    restart_server()
+    reconnect()
