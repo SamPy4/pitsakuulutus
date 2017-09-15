@@ -1,24 +1,27 @@
 import socket, time, os, sys
+from qlab_handler import qlab_GO
 
 # SERVER
 
-# TCP_IP must be server IP
-
 def restart_server():
-    """Restarts the server. """
+    """ Restarts the program. """
+    print("Restarting server...")
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
 try:
-    TCP_IP = "192.168.1.38"  # public IP "192.168.1.00"
-    TCP_PORT = 1234
+    # TCP_IP must be server IP
+    TCP_IP = "192.168.8.101"  # public IP "192.168.1.00"
+    TCP_PORT = 12345
     BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print("Socket init")
     s.bind((TCP_IP, TCP_PORT))
 
-    print("bind ok, waiting connection...")
-    s.listen(1)
+    print("Bind ok, waiting connection...")
+    s.listen(1)   # Waiting only 1 connection
 
     print("Accepting...")
     conn, addr = s.accept()
@@ -26,24 +29,29 @@ try:
     print ('Connection address:', addr)
 
     def reconnect():
-        #restart_server()
-        try:
-            print(tries)
-            if tries == 10:
-                restart_server()
-
-            print("Reconnecting...")
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-            print("Connecting...")
-            s.connect((TCP_IP, TCP_PORT))
-
-            print ('Connection address:', addr)
-            time.sleep(1)
-        except:
-            print(tries)
-            return
-        print(tries)
+        """ Restarts the server program in hope of a new connection """
+        print("Disconnected!!!")
+        conn.close()
+        print("Server closed")
+        restart_server()  # If restarted this will restart the program
+    #     #restart_server()
+    #     try:
+    #         print(tries)
+    #         if tries == 10:
+    #             restart_server()
+    #
+    #         print("Reconnecting...")
+    #         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #
+    #         print("Connecting...")
+    #         s.connect((TCP_IP, TCP_PORT))
+    #
+    #         print ('Connection address:', addr)
+    #         time.sleep(1)
+    #     except:
+    #         print(tries)
+    #         return
+    #     print(tries)
 
     def haeData():
         while True:
@@ -62,11 +70,14 @@ try:
     def kaynnistaKuulutus():
         """ ITSE KUULUTUKSEN KÄYNNISTYS """
         print("KUULUTETAAAAN: Pitsatilauksien pitsat ovat haettavissa :)")
-        time.sleep(4)
+        qlab_GO()
         return
 
+    # Estää ihmisiä rämppäämästä nappia
     spamminesto = 15 # sekuntia
     last_time_kuulutettu = time.time() - spamminesto
+
+    # The main loop starts here
     while True:
         data = haeData()
 
@@ -88,8 +99,9 @@ try:
         #     break
 
         print ("received data:", data.decode())
-        #conn.send(data)  # echo
-    conn.close()
 
 except:
+    raise
+    print("ded")
+    exit()
     restart_server()

@@ -16,18 +16,26 @@ try:
     s.connect((TCP_IP, TCP_PORT))
     print("Connected to {}:{}".format(TCP_IP, TCP_PORT))
     def restart_client():
-        """Restarts the server. """
+        """Restarts the client. """
         python = sys.executable
         os.execl(python, python, * sys.argv)
 
-    def connect():
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((TCP_IP, TCP_PORT))
-            print("reconnected")
-        except:
-            print("reconnection failed")
-        return
+    def reconnect():
+        """ Restarts the client program in hope of a new connection """
+        print("Restarting...")
+        s.close()
+        print("Client closed")
+        print("3sec safety wait")
+        time.sleep(3) # 3sec waiting because server must be up before client
+        print("Done, now restarting")
+        restart_client()
+        # try:
+        #     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #     s.connect((TCP_IP, TCP_PORT))
+        #     print("reconnected")
+        # except:
+        #     print("reconnection failed")
+        # return
 
     def kuulutus():
         kuulutusBYTE = str.encode("kuulutus")
@@ -35,7 +43,7 @@ try:
         return
 
     def valmis():
-        # Välkyttää ledejä tai jotain
+        """ Välkyttää ledejä tai jotain """
         pass
 
     while True:
@@ -53,19 +61,19 @@ try:
            data = s.recv(BUFFER_SIZE)
         except:
            print("Disconnected")
-           #connect()
+           reconnect()
 
         print("\n", data.decode(), "\n")
 
         if data.decode() == "valmis":
            valmis()
 
-        time.sleep(0.1)
+        time.sleep(0.1)   # Estää overflown, päivittää clientiä .1sec välein
 
-    s.close()
+
 
     print ("received data:", data)
 
 except:
     raise
-    restart_client()
+    reconnect()
