@@ -7,14 +7,14 @@ import time, sys, os
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(13, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 try:
-    TCP_IP = "192.168.1.38"
-    TCP_PORT = 1234
+    TCP_IP = "192.168.8.101"
+    TCP_PORT = 12345
     BUFFER_SIZE = 1024
     MESSAGE = str.encode("Hello, World!")
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((TCP_IP, TCP_PORT))
-
+    print("Connected to {}:{}".format(TCP_IP, TCP_PORT))
     def restart_client():
         """Restarts the server. """
         python = sys.executable
