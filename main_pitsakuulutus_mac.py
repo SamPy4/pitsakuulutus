@@ -1,5 +1,5 @@
 import socket, time, os, sys
-from osc_test1 import qlab_GO
+from qlab_handler import qlab_GO
 
 # SERVER
 
