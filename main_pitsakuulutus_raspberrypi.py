@@ -1,12 +1,12 @@
 import socket
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time, sys, os
 
 # CLIENT
 
 BUTTON = 13
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
@@ -60,15 +60,24 @@ def valmis():
     """ Välkyttää ledejä tai jotain """
     pass
 
+
+# Estää ihmisiä rämppäämästä nappia
+spamminesto = 15 # sekuntia
+last_time_kuulutettu = time.time() - spamminesto
+
 while True:
     if disconnected():
         reconnect()
 
     data = s.recv(BUFFER_SIZE)
 
-    # if GPIO.input(BUTTON) == 1:
-    #     print("Pyyntö lähetetty")
-    #     kuulutus()
+    if GPIO.input(BUTTON) == 1:
+        if time.time() - last_time_kuulutettu  >= spamminesto:
+            last_time_kuulutettu = time.time()
+            print("Pyyntö lähetetty")
+            kuulutus()
+        else:
+            print("Ei voi kuuluttaa vielä")
 
     print("\n", data.decode(), "\n")
 
