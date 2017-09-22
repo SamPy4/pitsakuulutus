@@ -64,7 +64,7 @@ def valmis():
 # Estää ihmisiä rämppäämästä nappia
 spamminesto = 15 # sekuntia
 last_time_kuulutettu = time.time() - spamminesto
-
+print("loop started")
 while True:
     if disconnected():
         reconnect()
