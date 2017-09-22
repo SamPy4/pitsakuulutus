@@ -1,6 +1,6 @@
 #from pythonosc import osc_message_builder
 #from pythonosc import udp_client
-from pyautogui import typewrite
+#from pyautogui import typewrite
 from time import sleep
 import argparse, os
 
@@ -19,8 +19,8 @@ import argparse, os
 # client.send_message("/address", "GO")
 
 def qlab_GO():
-    #print("Painampa koota")
-    typewrite("k")
+    print("Painampa koota")
+    #typewrite("k")
     #os.system("vlc pitsa-audio.mpeg vlc://quit")
     return
 
