@@ -4,7 +4,7 @@ import time, sys, os
 
 # CLIENT
 
-BUTTON = 6
+BUTTON = 13
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
