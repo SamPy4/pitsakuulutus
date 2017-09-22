@@ -68,9 +68,6 @@ class server():
         return disconnected
 
     def run(self):
-        # Estää ihmisiä rämppäämästä nappia
-        spamminesto = 15 # sekuntia
-        last_time_kuulutettu = time.time() - spamminesto
 
         # The main loop starts here
         while True:
@@ -80,13 +77,9 @@ class server():
             data = self.conn.recv(self.BUFFER_SIZE)
 
             if data.decode() == "kuulutus":
-                if time.time() - last_time_kuulutettu  >= spamminesto:
-                    last_time_kuulutettu = time.time()
-                    self.conn.send(str.encode("Action: Kuulutetaan\n"))
-                    kaynnistaKuulutus()
-                    continue
-                else:
-                    self.conn.send(str.encode("Action: Ei voi kuuluttaa vielä\n"))
+                self.conn.send(str.encode("Action: Kuulutetaan\n"))
+                kaynnistaKuulutus()
+                continue
 
                 self.conn.send(str.encode("Done"))
 
