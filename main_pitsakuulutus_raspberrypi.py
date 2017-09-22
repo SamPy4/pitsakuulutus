@@ -64,7 +64,9 @@ def valmis():
 # Estää ihmisiä rämppäämästä nappia
 spamminesto = 15 # sekuntia
 last_time_kuulutettu = time.time() - spamminesto
+x = 0
 print("loop started")
+
 while True:
     # if disconnected():
     #     reconnect()
@@ -79,11 +81,14 @@ while True:
 
     if GPIO.input(BUTTON) == 1:
         print("Button is pressed!!!")
-        if time.time() - last_time_kuulutettu  >= spamminesto:
+        x += 1
+
+        if time.time() - last_time_kuulutettu  >= spamminesto and x == 10:
             last_time_kuulutettu = time.time()
             print("Pyyntö lähetetty")
             kuulutus()
         else:
+            x = 0
             print("Ei voi kuuluttaa vielä")
 
     #print("\n", data.decode(), "\n")
