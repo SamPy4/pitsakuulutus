@@ -69,8 +69,10 @@ while True:
     # if disconnected():
     #     reconnect()
 
-    #data = s.recv(BUFFER_SIZE)
-
+    print("Reciveing data")
+    data = s.recv(BUFFER_SIZE)
+    print("Data recieved")
+    
     if GPIO.input(BUTTON) == 1:
         print("Button is pressed!!!")
         if time.time() - last_time_kuulutettu  >= spamminesto:
