@@ -64,6 +64,7 @@ def valmis():
 # Estää ihmisiä rämppäämästä nappia
 spamminesto = 15 # sekuntia
 last_time_kuulutettu = time.time() - spamminesto
+painaika = 50 # /10 = sec
 x = 0
 print("loop started")
 
@@ -84,7 +85,7 @@ while True:
         x += 1
         print("Added:", x)
 
-        if time.time() - last_time_kuulutettu  >= spamminesto and x == 10:
+        if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
             last_time_kuulutettu = time.time()
             print("Pyyntö lähetetty")
             kuulutus()
