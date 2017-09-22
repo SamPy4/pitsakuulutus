@@ -72,6 +72,7 @@ while True:
     data = s.recv(BUFFER_SIZE)
 
     if GPIO.input(BUTTON) == 1:
+        print("Button is pressed!!!")
         if time.time() - last_time_kuulutettu  >= spamminesto:
             last_time_kuulutettu = time.time()
             print("Pyyntö lähetetty")
