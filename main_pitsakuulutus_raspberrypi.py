@@ -69,9 +69,9 @@ while True:
     # if disconnected():
     #     reconnect()
 
-    print("Reciveing data")
-    data = s.recv(BUFFER_SIZE)
-    print("Data recieved")
+    # print("Reciveing data")
+    # data = s.recv(BUFFER_SIZE)
+    # print("Data recieved")
     #
     # print("Sending data")
     # s.send(str.encode("loop"))
@@ -86,6 +86,6 @@ while True:
         else:
             print("Ei voi kuuluttaa vielä")
 
-    print("\n", data.decode(), "\n")
+    #print("\n", data.decode(), "\n")
 
     time.sleep(0.1)   # Estää overflown, päivittää clientiä .1sec välein
