@@ -4,7 +4,7 @@ import time, sys, os
 
 # CLIENT
 
-BUTTON = 13
+BUTTON = 6
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
@@ -69,7 +69,7 @@ while True:
     # if disconnected():
     #     reconnect()
 
-    data = s.recv(BUFFER_SIZE)
+    #data = s.recv(BUFFER_SIZE)
 
     if GPIO.input(BUTTON) == 1:
         print("Button is pressed!!!")
