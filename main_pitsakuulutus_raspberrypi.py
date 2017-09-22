@@ -72,10 +72,10 @@ while True:
     print("Reciveing data")
     data = s.recv(BUFFER_SIZE)
     print("Data recieved")
-
-    print("Sending data")
-    s.send(str.encode("loop"))
-    print("Data sent")
+    #
+    # print("Sending data")
+    # s.send(str.encode("loop"))
+    # print("Data sent")
 
     if GPIO.input(BUTTON) == 1:
         print("Button is pressed!!!")
