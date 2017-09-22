@@ -66,8 +66,8 @@ spamminesto = 15 # sekuntia
 last_time_kuulutettu = time.time() - spamminesto
 print("loop started")
 while True:
-    if disconnected():
-        reconnect()
+    # if disconnected():
+    #     reconnect()
 
     data = s.recv(BUFFER_SIZE)
 
