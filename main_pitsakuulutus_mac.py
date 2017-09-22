@@ -24,7 +24,7 @@ class server():
         print ('Connection address:', addr)
 
 
-    def restart_server():
+    def restart_server(self):
         """ Restarts the program. """
         print("Restarting server...")
         python = sys.executable
@@ -45,7 +45,7 @@ class server():
 
         print ('Connection address:', addr)
 
-    def kaynnistaKuulutus():
+    def kaynnistaKuulutus(self):
         """ ITSE KUULUTUKSEN KÄYNNISTYS """
         print("KUULUTETAAAAN: Pitsatilauksien pitsat ovat haettavissa :)")
         qlab_GO()
@@ -71,17 +71,19 @@ class server():
 
         # The main loop starts here
         while True:
-            if self.disconnected():
-                self.reconnect()
+            # if self.disconnected():
+            #     self.reconnect()
+
+            #self.conn.send(str.encode("loop"))
 
             data = self.conn.recv(self.BUFFER_SIZE)
 
             if data.decode() == "kuulutus":
                 self.conn.send(str.encode("Action: Kuulutetaan\n"))
-                kaynnistaKuulutus()
+                self.kaynnistaKuulutus()
                 continue
 
-                self.conn.send(str.encode("Done"))
+            self.conn.send(str.encode("Done"))
 
             # if not data:
             #     break
