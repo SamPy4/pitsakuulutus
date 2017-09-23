@@ -6,9 +6,11 @@ import time, sys, os
 
 BUTTON = 6
 LED1   = 19
+LED1   = 5
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(LED1, GPIO.OUT)
+GPIO.setup(LED2, GPIO.OUT)
 
 TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
@@ -84,8 +86,10 @@ while True:
 
     if time.time() - last_time_kuulutettu  >= spamminesto:
         GPIO.output(LED1, False)
+        GPIO.output(LED2, True)
     else:
         GPIO.output(LED1, True)
+        GPIO.output(LED2, False)
 
     if GPIO.input(BUTTON) == 1:
         # print("Button is pressed!!!")
