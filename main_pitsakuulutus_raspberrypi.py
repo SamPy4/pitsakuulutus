@@ -102,12 +102,10 @@ while True:
         x += 1
         # print("Added:", x)
 
-
-        #GPIO.output(LED3, x*4)
-        PWM1.ChangeDutyCycle(x)
+        PWM1.ChangeDutyCycle(x)  # Kirkastaa lediä
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
-            GPIO.output(LED3, False)
+            PWM1.ChangeDutyCycle(x)
 
             last_time_kuulutettu = time.time()
             print("Pyyntö lähetetty")
@@ -116,7 +114,7 @@ while True:
             pass
             #print("Ei voi kuuluttaa vielä")
     else:
-        GPIO.output(LED3, False)
+        PWM1.ChangeDutyCycle(x)
         x = 0
         #print("Zeroed:", x)
 
