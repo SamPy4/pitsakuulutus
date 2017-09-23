@@ -6,7 +6,7 @@ import time, sys, os
 
 BUTTON = 6
 LED1   = 19
-LED1   = 5
+LED2   = 5
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(LED1, GPIO.OUT)
