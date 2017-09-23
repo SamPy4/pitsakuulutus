@@ -83,9 +83,9 @@ while True:
     # print("Data sent")
 
     if time.time() - last_time_kuulutettu  >= spamminesto:
-        GPIO.output(LED1, True)
-    else:
         GPIO.output(LED1, False)
+    else:
+        GPIO.output(LED1, True)
 
     if GPIO.input(BUTTON) == 1:
         # print("Button is pressed!!!")
