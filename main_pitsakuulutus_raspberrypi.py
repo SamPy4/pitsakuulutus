@@ -99,10 +99,10 @@ while True:
 
     if GPIO.input(BUTTON) == 1:
         # print("Button is pressed!!!")
-        x += 1
-        # print("Added:", x)
 
-        PWM1.ChangeDutyCycle(x*2)  # Kirkastaa lediä
+        if x+1<=painaika: x += 1  # Lisätään x:ää jos se ei ylitä rajaa
+
+        PWM1.ChangeDutyCycle(x*2)  # Kirkastaa lediä x saa olla maksimissaan 100.0
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
             PWM1.ChangeDutyCycle(x)
