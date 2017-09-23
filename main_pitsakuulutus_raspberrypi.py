@@ -102,7 +102,7 @@ while True:
 
         if x+1<=painaika: x += 1  # Lisätään x:ää jos se ei ylitä rajaa
 
-        PWM1.ChangeDutyCycle(x*3/5)  # Kirkastaa lediä x saa olla maksimissaan 100.0
+        PWM1.ChangeDutyCycle(x*4/5)  # Kirkastaa lediä x saa olla maksimissaan 100.0
         print(x)
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
