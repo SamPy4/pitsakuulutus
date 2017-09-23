@@ -102,7 +102,7 @@ while True:
         x += 1
         # print("Added:", x)
 
-        PWM1.ChangeDutyCycle(x)  # Kirkastaa lediä
+        PWM1.ChangeDutyCycle(x*2)  # Kirkastaa lediä
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
             PWM1.ChangeDutyCycle(x)
