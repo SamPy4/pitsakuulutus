@@ -15,6 +15,9 @@ GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
 GPIO.setup(LED3, GPIO.OUT)
 
+PWM1 = GPIO.PWM(LED3, 50)
+PWM1.start(0)
+
 TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
 BUFFER_SIZE = 1024
@@ -99,7 +102,9 @@ while True:
         x += 1
         # print("Added:", x)
 
-        GPIO.output(LED3, x*4)
+
+        #GPIO.output(LED3, x*4)
+        PWM1.ChangeDutyCycle(x)
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
             GPIO.output(LED3, False)
