@@ -5,12 +5,15 @@ import time, sys, os
 # CLIENT
 
 BUTTON = 6
-LED1   = 19
+LED1   = 11
 LED2   = 5
+LED3   = 19
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
+GPIO.setup(LED3, GPIO.OUT)
 
 TCP_IP = "192.168.1.38"
 TCP_PORT = 12346
@@ -96,7 +99,11 @@ while True:
         x += 1
         # print("Added:", x)
 
+        GPIO.output(LED3, x*4)
+
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
+            GPIO.output(LED3, False)
+
             last_time_kuulutettu = time.time()
             print("Pyyntö lähetetty")
             kuulutus()
@@ -104,6 +111,7 @@ while True:
             pass
             #print("Ei voi kuuluttaa vielä")
     else:
+        GPIO.output(LED3, False)
         x = 0
         #print("Zeroed:", x)
 
