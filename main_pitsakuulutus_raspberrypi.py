@@ -15,7 +15,7 @@ GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
 GPIO.setup(LED3, GPIO.OUT)
 
-PWM1 = GPIO.PWM(LED3, 50)  # pin, frec
+PWM1 = GPIO.PWM(LED3, 100)  # pin, frec
 PWM1.start(0)
 
 TCP_IP = "192.168.1.38"
