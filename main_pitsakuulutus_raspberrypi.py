@@ -81,9 +81,9 @@ while True:
     # print("Data sent")
 
     if GPIO.input(BUTTON) == 1:
-        print("Button is pressed!!!")
+        # print("Button is pressed!!!")
         x += 1
-        print("Added:", x)
+        # print("Added:", x)
 
         if time.time() - last_time_kuulutettu  >= spamminesto and x == painaika:
             last_time_kuulutettu = time.time()
@@ -93,7 +93,7 @@ while True:
             print("Ei voi kuuluttaa vielä")
     else:
         x = 0
-        print("Zeroed:", x)
+        #print("Zeroed:", x)
 
     #print("\n", data.decode(), "\n")
 
