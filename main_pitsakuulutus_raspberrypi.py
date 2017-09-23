@@ -4,12 +4,13 @@ import time, sys, os
 
 # CLIENT
 
-BUTTON = 6
-LED1   = 11
-LED2   = 5
-LED3   = 19
+BUTTON = 6  # Main button
+LED1   = 11 # Red "won't send"-led
+LED2   = 5  # Green "will send"-led
+LED3   = 19 # White/yellow progress PWM led
 
 GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(BUTTON, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
@@ -43,7 +44,7 @@ def reconnect():
 
 
 def kuulutus():
-    kuulutusBYTE = str.encode("kuulutus")
+    kuulutusBYTE = str.encode("kuulutus;{}".format(time.time()))
     s.send(kuulutusBYTE)
     return
 
