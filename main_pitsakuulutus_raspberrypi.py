@@ -90,7 +90,8 @@ while True:
             print("Pyyntö lähetetty")
             kuulutus()
         else:
-            print("Ei voi kuuluttaa vielä")
+            pass
+            #print("Ei voi kuuluttaa vielä")
     else:
         x = 0
         #print("Zeroed:", x)
