@@ -69,6 +69,7 @@ class server():
 
     def run(self):
 
+        print()
         # The main loop starts here
         while True:
             # if self.disconnected():
@@ -76,20 +77,28 @@ class server():
 
             #self.conn.send(str.encode("loop"))
 
+            print("Listening data")
             data = self.conn.recv(self.BUFFER_SIZE)
+            data = data.decode().split(";")
 
-            if data.decode() == "kuulutus":
-                self.conn.send(str.encode("Action: Kuulutetaan\n"))
-                self.kaynnistaKuulutus()
-                continue
+            if data[0] == "kuulutus":
+                if time.time() - float(data[1]) <= 10:
+                    print()
+                    print("passed time", time.time() - float(data[1]), "s")
+                    self.conn.send(str.encode("Action: Kuulutetaan\n"))
+                    self.kaynnistaKuulutus()
+                    self.conn.send(str.encode("Done"))
 
-            self.conn.send(str.encode("Done"))
 
             # if not data:
             #     break
 
-            print ("received data:", data.decode())
-
+            try:
+                print ("Received data:", data[0], data[1])
+                continue
+            except:
+                pass
+                #print ("Received data:", data)
 
 if __name__ == "__main__":
     s = server()
