@@ -19,7 +19,7 @@ from time import sleep
 # client.send_message("/address", "GO")
 
 def qlab_GO():
-    print("Painampa koota")
+    print("QLab kuittaa")
     #typewrite("k")
     #os.system("vlc pitsa-audio.mpeg vlc://quit")
     return
