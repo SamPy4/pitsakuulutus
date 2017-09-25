@@ -4,6 +4,11 @@ import time, sys, os
 
 # CLIENT
 
+# Raspberry Pi UI added
+""" ^ PLS DON'T REMOVE ^ """
+
+
+
 BUTTON = 6  # Main button
 LED1   = 11 # Red "won't send"-led
 LED2   = 5  # Green "will send"-led
