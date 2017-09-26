@@ -89,10 +89,6 @@ class server():
                     self.kaynnistaKuulutus()
                     self.conn.send(str.encode("Done"))
 
-
-            # if not data:
-            #     break
-
             try:
                 print ("Received data:", data[0], data[1])
                 continue
